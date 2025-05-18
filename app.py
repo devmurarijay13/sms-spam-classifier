@@ -114,5 +114,5 @@ input_sms = st.text_area("Enter The Message")
 if st.button('Predict'):
     transform_sms = transform_text(input_sms)
     vector_input = tfidf.transform([transform_sms])
-    result = model.predict(vector_input)[0]
+    result = model.predict([vector_input])[0]
     st.header("Spam" if result == 1 else "Not Spam")
