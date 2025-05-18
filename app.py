@@ -4,7 +4,13 @@ import string
 
 from nltk.stem.porter import PorterStemmer
 import nltk
-nltk.download('punkt')
+
+# Ensure punkt is available when the app starts
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
+
 nltk.download('stopwords')
 
 
