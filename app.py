@@ -70,7 +70,7 @@ from nltk.corpus import stopwords
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
-    nltk.download('punkt')
+    nltk.download('punkt',quiet=True)
 
 try:
     nltk.data.find('corpora/stopwords')
