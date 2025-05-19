@@ -6,6 +6,11 @@ import os
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
+
+nltk.download('punkt', download_dir='nltk_data')
+nltk.download('stopwords', download_dir='nltk_data')
+
+
 # Set up a local nltk_data path
 nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
 os.makedirs(nltk_data_path, exist_ok=True)
