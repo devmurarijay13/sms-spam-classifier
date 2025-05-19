@@ -1,9 +1,12 @@
 import nltk
+import os
 
-try:
-    nltk.data.find('tokenizers/punkt')
-except LookupError:
-    nltk.download('punkt')
+# Download punkt only if not already downloaded
+nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
+nltk.data.path.append(nltk_data_path)
+
+if not os.path.exists(os.path.join(nltk_data_path, "tokenizers", "punkt")):
+    nltk.download("punkt", download_dir=nltk_data_path)
 
 import streamlit as st
 import pickle
