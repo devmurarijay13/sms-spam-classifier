@@ -1,42 +1,55 @@
 import streamlit as st
 import pickle
-import nltk
 import string
-import os
 from nltk.corpus import stopwords
+import nltk
+nltk.download('punkt')
 from nltk.stem.porter import PorterStemmer
-
-# Setup NLTK data directory
-nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
-nltk.data.path.append(nltk_data_path)
-if not os.path.exists(os.path.join(nltk_data_path, "tokenizers", "punkt")):
-    nltk.download("punkt", download_dir=nltk_data_path)
-if not os.path.exists(os.path.join(nltk_data_path, "corpora", "stopwords")):
-    nltk.download("stopwords", download_dir=nltk_data_path)
 
 ps = PorterStemmer()
 
+
 def transform_text(text):
     text = text.lower()
-    words = nltk.word_tokenize(text)
-    words = [w for w in words if w.isalnum()]
-    words = [w for w in words if w not in stopwords.words('english') and w not in string.punctuation]
-    words = [ps.stem(w) for w in words]
-    return " ".join(words)
+    text = nltk.word_tokenize(text)
 
-# Load model and vectorizer
-tfidf = pickle.load(open("vectorizer.pkl", "rb"))
-model = pickle.load(open("model.pkl", "rb"))
+    y = []
+    for i in text:
+        if i.isalnum():
+            y.append(i)
 
-st.title("SMS Spam Classifier")
+    text = y[:]
+    y.clear()
 
-input_sms = st.text_area("Enter the message:")
+    for i in text:
+        if i not in stopwords.words('english') and i not in string.punctuation:
+            y.append(i)
 
-if st.button("Predict"):
+    text = y[:]
+    y.clear()
+
+    for i in text:
+        y.append(ps.stem(i))
+
+    return " ".join(y)
+
+tfidf = pickle.load(open('vectorizer.pkl','rb'))
+model = pickle.load(open('model.pkl','rb'))
+
+st.title("Email/SMS Spam Classifier")
+
+input_sms = st.text_area("Enter the message")
+
+if st.button('Predict'):
+
+    # 1. preprocess
     transformed_sms = transform_text(input_sms)
+    # 2. vectorize
     vector_input = tfidf.transform([transformed_sms])
+    # 3. predict
     result = model.predict(vector_input)[0]
+    # 4. Display
     if result == 1:
-        st.error("🚨 Spam Message")
+        st.header("Spam")
     else:
-        st.success("✅ Not Spam")
+        st.header("Not Spam")
