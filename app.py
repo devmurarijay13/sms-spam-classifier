@@ -6,19 +6,19 @@ import os
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 
-# Create nltk_data directory inside your app directory
-nltk_data_path = os.path.join(os.path.dirname(__file__), 'nltk_data')
+# Set up a local nltk_data path
+nltk_data_path = os.path.join(os.path.dirname(__file__), "nltk_data")
+os.makedirs(nltk_data_path, exist_ok=True)
 
-# Download NLTK data to this local directory
+# Download required NLTK data to local path
 nltk.download('punkt', download_dir=nltk_data_path)
 nltk.download('stopwords', download_dir=nltk_data_path)
 
-# Tell NLTK to use this path
+# Tell nltk to use the local path
 nltk.data.path.append(nltk_data_path)
 
 ps = PorterStemmer()
 
-ps = PorterStemmer()
 
 def transform_text(text):
     text = text.lower()
