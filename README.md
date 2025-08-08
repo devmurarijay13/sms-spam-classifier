@@ -42,15 +42,15 @@ This project performs spam detection on SMS messages using natural language proc
 
 ## 📁 Folder Structure
 
-sms-spam-classifier/
+sms-spam-classifier/ <br>
 │
-├── app.py # Streamlit app script
-├── model.pkl # Trained ML model
-├── vectorizer.pkl # TF-IDF vectorizer
-├── sms-spam-detection.ipynb# Jupyter notebook (model training)
-├── sms_spam.csv # Dataset
-├── requirements.txt # Project dependencies
-└── README.md # Project documentation
+├── app.py # Streamlit app script <br>
+├── model.pkl # Trained ML model<br>
+├── vectorizer.pkl # TF-IDF vectorizer<br>
+├── sms-spam-detection.ipynb# Jupyter notebook (model training)<br>
+├── sms_spam.csv # Dataset<br>
+├── requirements.txt # Project dependencies<br>
+└── README.md # Project documentation<br>
 
 
 ---
@@ -85,3 +85,4 @@ The dataset `sms_spam.csv` contains SMS messages labeled as `spam` or `ham` (not
 🙋‍♂️ Author
 Jay Devmurari
 📧 devmurarijay66@gmail.com
+
